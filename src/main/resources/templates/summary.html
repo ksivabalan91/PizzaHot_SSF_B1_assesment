@@ -15,23 +15,25 @@
         </tr>
         <tr>
             <td>Order Number:</td>
-            <!-- <td data-th-field="${delivery.orderID}"></td> -->
+            <td> 
+                <a data-th-href="@{/order/{orderID}(orderID=${orderID})}" data-th-text="${orderID}"></a>
+            </td>
         </tr>
         <tr>
-            <td>Your order will be delivered to</td>
-            <!-- <td data-th-field="${delivery.address}"></td> -->
+            <td>Your order will be delivered to:</td>
+            <td> <span data-th-text="${address}"></span></td>
         </tr>
         <tr>
-            <td>Pizza Cost</td>
-            <!-- <td>$ <span data-th-field="${delivery.pizzaOrder.pizzaCost}"></span></td> -->
+            <td>Pizza Cost:</td>
+            <td>$ <span data-th-text="${pizzaCost}"></span></td>
+        </tr>
+        <tr data-th-if="${rush}">
+            <td>Rush</td>
+            <td>$2</td>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
+            <td>Total cost:</td>
+            <td>$ <span data-th-text="${totalCost}"></span></td>
         </tr>
     </table>
 </body>

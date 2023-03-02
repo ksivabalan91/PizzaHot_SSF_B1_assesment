@@ -46,7 +46,7 @@ public class PizzaController {
     }
     
     @PostMapping(path="/pizza/order")
-    public String postOrder(@RequestBody MultiValueMap<String,String> form){        
+    public String postOrder(@RequestBody MultiValueMap<String,String> form, Model model){        
         
         //! read form data
         String name = form.getFirst("name");
@@ -67,8 +67,15 @@ public class PizzaController {
 
         //! Create delivery object
         Delivery delivery = pizzaSvc.createOrder(name, address, phoneNo, rush, comments, pizzaOrder);
+        delivery.calculateTotalCost();
         //! save order to redis
         pizzaSvc.saveOrder(delivery);
+        
+        model.addAttribute("orderID", delivery.getOrderID());
+        model.addAttribute("address", address);
+        model.addAttribute("pizzaCost", pizzaOrder.getCost());
+        model.addAttribute("rush", rush);
+        model.addAttribute("totalCost", delivery.getTotalCost());
         
         return "summary";
     }

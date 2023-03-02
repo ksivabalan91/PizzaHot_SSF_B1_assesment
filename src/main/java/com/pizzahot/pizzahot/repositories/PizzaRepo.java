@@ -34,5 +34,16 @@ public class PizzaRepo {
 
         return true;
     }
+
+    public Map<String,String> getOrderByID(String orderID){
+        
+        Map<String,String> respMap = new HashMap<>();
+
+            respMap.put("exists", template.hasKey(orderID).toString());
+            respMap.put("payload", template.opsForValue().get(orderID));       
+        
+    return respMap;
+
+    }
     
 }
