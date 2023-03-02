@@ -7,6 +7,60 @@
     <title>Delivery</title>
 </head>
 <body>
-    Delivery    
+    <table>
+        <form action="/pizza/order" th:action="@{/pizza/order}" th:object="${delivery}" method="post">
+            <tr>
+                <input type="hidden" name="orderList" data-th-value="${orderList}">
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="name" placeholder="your name"/>
+                    <!-- <div data-th-if="${#fields.hasErrors('name')}" >
+                        <span data-th-errorclass="error" data-th-errors="*{name}"></span>
+                    </div> -->
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="text" name="address" placeholder="your address"/>
+                    <!-- <div data-th-if="${#fields.hasErrors('address')}" >
+                        <span data-th-errorclass="error" data-th-errors="*{address}"></span>
+                    </div>                 -->
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <input type="number" name="phoneNo" placeholder="your phoneNo"/>
+                    <!-- <div data-th-if="${#fields.hasErrors('phoneNo')}" >
+                        <span data-th-errorclass="error" data-th-errors="*{phoneNo}"></span>
+                    </div>                                     -->
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    rush
+                    <input type="checkbox" value="true" name="rush"/>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <input type="text" name="comments" placeholder="your comments"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <button type="submit" formmethod="GET" formaction="/">Cancel Order</button>
+                </td>
+                <td>
+                    <button type="submit">Order</button>
+                </td>
+            </tr>            
+        </form>
+    </table>
 </body>
 </html>
