@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ import com.pizzahot.pizzahot.models.PizzaOrder;
 public class PizzaRepo {
 
 
-    @Autowired
+    @Autowired @Qualifier("pizza")
     private RedisTemplate<String,String> template;
 
     //todo different method

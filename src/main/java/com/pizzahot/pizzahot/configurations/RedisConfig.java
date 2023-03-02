@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -31,9 +30,8 @@ public class RedisConfig{
     @Value("${spring.redis.database}")
     private Optional<Integer> redisDatabase;
 
-    @Bean
-    @Scope("singleton")
-    public RedisTemplate<String, Object> redisTemplate() {
+    @Bean("pizza")
+    public RedisTemplate<String, String> redisTemplate() {
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setHostName(redisHost);
         config.setPort(redisPort.get());
@@ -49,7 +47,7 @@ public class RedisConfig{
         final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config,jedisClient);
 
         jedisFac.afterPropertiesSet();
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(jedisFac);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
